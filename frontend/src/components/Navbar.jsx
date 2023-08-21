@@ -3,18 +3,33 @@ import {
   Flex,
   Heading,
   Input,
-  Link,
   Stack,
   InputGroup,
   InputLeftElement,
+  Text,
+  HStack,
 } from "@chakra-ui/react";
+import { NavLink } from "react-router-dom";
 import React from "react";
 import { CiSearch } from "react-icons/ci";
 
 const Navbar = () => {
   return (
-    <Box width="100%" borderBottomWidth="2px" paddingY={1} boxShadow="sm">
-      <Flex justifyContent="space-between" alignItems="center" marginX={4}>
+    <Box
+      width="100%"
+      mb="1rem"
+      bgColor="white"
+      pos="fixed"
+      zIndex={999}
+      borderWidth={1}
+      borderColor="gray.200"
+    >
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+        marginX={4}
+        paddingY={2}
+      >
         <Heading size="lg">ONLINE_SHOP</Heading>
 
         <Stack
@@ -24,23 +39,27 @@ const Navbar = () => {
           verticalAlign="center"
           fontSize="17px"
         >
-          <Link>Home</Link>
-          <Link>Products</Link>
-          <Link>Contact us</Link>
-          <Link>About</Link>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/products">Products</NavLink>
+          <NavLink to="/contact">Contact us</NavLink>
+          <NavLink to="/about">About</NavLink>
         </Stack>
-        <InputGroup width=" 25%">
-          <InputLeftElement pointerEvents="none">
-            <CiSearch />
-          </InputLeftElement>
-          <Input
-            type="text"
-            placeholder="Search"
-            borderWidth="1px"
-            borderRadius="4px"
-            borderColor="gray.500"
-          />
-        </InputGroup>
+        <HStack width="25%" gap={6}>
+          <InputGroup width=" 100%">
+            <InputLeftElement pointerEvents="none">
+              <CiSearch />
+            </InputLeftElement>
+            <Input
+              type="text"
+              placeholder="Search"
+              borderWidth="1px"
+              borderRadius="4px"
+              borderColor="gray.400"
+              focusBorderColor="brand.primary"
+            />
+          </InputGroup>
+          <Text>Cart</Text>
+        </HStack>
       </Flex>
     </Box>
   );
