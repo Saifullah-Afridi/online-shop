@@ -17,11 +17,7 @@ const productSlice = createSlice({
     isLoading: false,
     errorMessage: "",
   },
-  reducers: {
-    addProducts: (state, action) => {
-      state.productss.push([...action.payload]);
-    },
-  },
+
   extraReducers: (builder) => {
     builder.addCase(getProducts.pending, (state, action) => {
       state.isLoading = true;
