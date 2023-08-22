@@ -22,7 +22,7 @@ const Product = ({ product }) => {
     <Card borderWidth={2} align="center">
       <CardBody>
         <Link to={product._id}>
-          <Image src={product.image} width="170px" border={1} />
+          {/* <Image src={product.image[0].url} width="170px" border={1} /> */}
           <Text fontSize="20px" fontWeight="semibold" paddingY={1}>
             {product.name}
           </Text>

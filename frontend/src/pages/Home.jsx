@@ -6,17 +6,11 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 const Home = () => {
-  const product = {
-    id: 1,
-    name: "Blue Shirt",
-    price: 300,
-    image: shirt,
-  };
   return (
     <Fragment>
       <Navbar s></Navbar>
       <HeroSection />
-      <FeaturedProducts product={product} />
+      <FeaturedProducts />
       <Footer />
     </Fragment>
   );

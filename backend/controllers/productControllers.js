@@ -52,7 +52,7 @@ exports.getAllProducts = catchAsyncError(async (req, res, next) => {
 
   //pagination
   const page = req.query.page * 1 || 1;
-  const limit = req.query.limit * 1 || 3;
+  const limit = req.query.limit * 100;
   const skip = (page - 1) * limit;
   query = query.skip(skip).limit(limit);
 
@@ -65,6 +65,7 @@ exports.getAllProducts = catchAsyncError(async (req, res, next) => {
   //executing query
   const products = await query;
   res.status(200).json({
+    results: products.length,
     status: "success",
     products,
   });

@@ -7,9 +7,11 @@ const userRoutes = require("./routes/userRoutes");
 const cookieParser = require("cookie-parser");
 const reviewRoutes = require("./routes/reviewRoutes");
 const orderRoutes = require("./routes/orderRoutes");
+const cors = require("cors");
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 //routes
 app.use("/api/v1/products", productRoutes);
 app.use("/api/v1/users", userRoutes);
