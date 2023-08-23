@@ -4,14 +4,6 @@ import ReactStars from "react-rating-stars-component";
 import profile from "../assets/profile.jpg";
 
 const ReviewCard = ({ review }) => {
-  const options = {
-    edit: false,
-    color: " rgba(20,20,20,0.1)",
-    activeColor: "tomato",
-    value: review.ratings,
-    isHalf: true,
-    size: window.innerWidth < 600 ? 16 : 18,
-  };
   return (
     <Flex alignContent="center" gap="1rem">
       <Box w="150px">
@@ -20,7 +12,14 @@ const ReviewCard = ({ review }) => {
       <Box w="200px">
         <Text>{review.name}</Text>
         <Text>{review.comment}</Text>
-        <ReactStars {...options} />
+        <ReactStars
+          edit={false}
+          color=" rgba(20,20,20,0.1)"
+          activeColor="tomato"
+          value={review.rating}
+          isHalf={true}
+          size={window.innerWidth < 600 ? 16 : 18}
+        />
       </Box>
     </Flex>
   );

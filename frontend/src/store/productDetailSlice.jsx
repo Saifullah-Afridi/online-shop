@@ -28,7 +28,6 @@ const productDetailSlice = createSlice({
     });
     builder.addCase(getProductDetail.fulfilled, (state, action) => {
       state.isLoading = false;
-      console.log(state.productDe, "*******************");
       state.productDe = action.payload;
     });
     builder.addCase(getProductDetail.rejected, (state, action) => {
