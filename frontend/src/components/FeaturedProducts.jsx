@@ -1,11 +1,11 @@
-import { Box, Center, Container, Heading, SimpleGrid } from "@chakra-ui/react";
+import { Box, Center, Heading, SimpleGrid } from "@chakra-ui/react";
 import Product from "./Product";
-import axios, { CanceledError } from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../store/productSlice";
-import { useEffect, useState } from "react";
+
 import { Spinner } from "@chakra-ui/react";
 import { useAlert } from "react-alert";
+import { useEffect } from "react";
 const FeaturedProducts = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
@@ -49,11 +49,6 @@ const FeaturedProducts = () => {
             <Product key={product.id} product={product}></Product>
           ))}
       </SimpleGrid>
-      {/* <ul>
-        {productss.map((dat) => (
-          <li key={dat._id}>{dat.name}</li>
-        ))}
-      </ul> */}
     </Box>
   );
 };

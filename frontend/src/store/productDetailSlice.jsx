@@ -2,39 +2,37 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getProductDetail = createAsyncThunk(
-  "productDetail/getProducts",
-  async (id, thunkAPI) => {
-    try {
-      const { data } = await axios.get(
-        `http://localhost:3001/api/v1/products/${id}`
-      );
-
-      return data.products;
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err.response.data.message);
-    }
+  "productDe/getProductDetail",
+  async (id) => {
+    // try {
+    const { data } = await axios.get(
+      `http://localhost:3001/api/v1/products/${id}`
+    );
+    return data.product;
+    //   } catch (err) {
+    //     return thunkAPI.rejectWithValue(err.response.data.message);
+    //   }
   }
 );
 
 const productDetailSlice = createSlice({
   name: "productDetail",
   initialState: {
-    productDetail: {},
+    productDe: { id: 1 },
     isLoading: false,
     errorMessage: "",
   },
-
   extraReducers: (builder) => {
     builder.addCase(getProductDetail.pending, (state, action) => {
       state.isLoading = true;
     });
     builder.addCase(getProductDetail.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.productDetail = action.payload;
+      console.log(state.productDe, "*******************");
+      state.productDe = action.payload;
     });
     builder.addCase(getProductDetail.rejected, (state, action) => {
       state.isLoading = false;
-      state.errorMessage = action.payload;
     });
   },
 });
