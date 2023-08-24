@@ -37,6 +37,7 @@ const Products = () => {
           </Grid>
         </Grid>
       )}
+
       <Footer />
     </React.Fragment>
   );

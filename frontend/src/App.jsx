@@ -6,6 +6,7 @@ import About from "./pages/About";
 
 import ProductDetail from "./pages/ProductDetail";
 import SearchProducts from "./pages/SearchProducts";
+
 function App() {
   return (
     <BrowserRouter>
@@ -14,6 +15,7 @@ function App() {
         <Route path="/Products" element={<Products />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
+
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/searchproducts/:keyword" element={<SearchProducts />} />
       </Routes>

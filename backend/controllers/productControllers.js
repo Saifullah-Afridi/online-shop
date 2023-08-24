@@ -13,6 +13,7 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
 });
 
 exports.getAllProducts = catchAsyncError(async (req, res, next) => {
+  const resultPerPage = 8;
   //filtering
   const queryObj = { ...req.query };
   const excludedField = ["page", "sort", "fields", "limit"];
@@ -52,7 +53,7 @@ exports.getAllProducts = catchAsyncError(async (req, res, next) => {
 
   //pagination
   const page = req.query.page * 1 || 1;
-  const limit = req.query.limit * 100;
+  const limit = req.query.limit * 8;
   const skip = (page - 1) * limit;
   query = query.skip(skip).limit(limit);
 
@@ -65,6 +66,7 @@ exports.getAllProducts = catchAsyncError(async (req, res, next) => {
   //executing query
   const products = await query;
   res.status(200).json({
+    resultPerPage,
     results: products.length,
     status: "success",
     products,

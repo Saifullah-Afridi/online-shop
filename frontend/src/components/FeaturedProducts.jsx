@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../store/productSlice";
 
 import { Spinner } from "@chakra-ui/react";
-import { useAlert } from "react-alert";
+// import { useAlert } from "react-alert";
 import { useEffect } from "react";
 const FeaturedProducts = () => {
-  const alert = useAlert();
+  // const alert = useAlert();
   const dispatch = useDispatch();
   const { productss, isLoading, errorMessage } = useSelector(
     (state) => state.product
