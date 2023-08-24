@@ -19,7 +19,7 @@ const Products = () => {
     }
     dispatch(getProducts());
   }, [dispatch]);
-  console.log(productss);
+
   return (
     <React.Fragment>
       <Navbar />
@@ -30,8 +30,8 @@ const Products = () => {
           <GridItem bg="red">aasdfsfafaf</GridItem>
           <Grid templateColumns={"1fr 1fr 1fr"} gap={6} mx={2}>
             {productss.map((product) => (
-              <GridItem>
-                <Product key={product._id} product={product}></Product>
+              <GridItem key={product._id}>
+                <Product product={product}></Product>
               </GridItem>
             ))}
           </Grid>

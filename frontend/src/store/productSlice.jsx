@@ -4,7 +4,8 @@ import axios from "axios";
 export const getProducts = createAsyncThunk(
   "products/getProducts",
   async () => {
-    const { data } = await axios.get("http://localhost:3001/api/v1/products/");
+    const url = `http://localhost:3001/api/v1/products/`;
+    const { data } = await axios.get(url);
 
     return data.products;
   }

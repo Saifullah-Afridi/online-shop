@@ -12,6 +12,7 @@ import {
 import { NavLink } from "react-router-dom";
 import React from "react";
 import { CiSearch } from "react-icons/ci";
+import Search from "./Search";
 
 const Navbar = () => {
   return (
@@ -45,19 +46,7 @@ const Navbar = () => {
           <NavLink to="/about">About</NavLink>
         </Stack>
         <HStack width="25%" gap={6}>
-          <InputGroup width=" 100%">
-            <InputLeftElement pointerEvents="none">
-              <CiSearch />
-            </InputLeftElement>
-            <Input
-              type="text"
-              placeholder="Search"
-              borderWidth="1px"
-              borderRadius="4px"
-              borderColor="gray.400"
-              focusBorderColor="brand.primary"
-            />
-          </InputGroup>
+          <Search />
           <Text>Cart</Text>
         </HStack>
       </Flex>

@@ -10,14 +10,7 @@ import {
 import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 const Product = ({ product }) => {
-  const options = {
-    edit: false,
-    color: " rgba(20,20,20,0.1)",
-    activeColor: "tomato",
-    value: product.ratings,
-    isHalf: true,
-    size: window.innerWidth < 600 ? 16 : 18,
-  };
+  const options = {};
   return (
     <Link to={`/products/${product._id}`}>
       <Card borderWidth={2} align="center">
@@ -28,7 +21,14 @@ const Product = ({ product }) => {
           </Text>
 
           <HStack>
-            <ReactStars {...options} />
+            <ReactStars
+              edit={false}
+              color=" rgba(20,20,20,0.1)"
+              activeColor="tomato"
+              value={product.ratings}
+              isHalf={true}
+              size-={window.innerWidth < 600 ? 16 : 18}
+            />
             <Text fontSize="14px">({product.numberOfReviews} Reviews)</Text>
           </HStack>
           <Text>${product.price}</Text>
