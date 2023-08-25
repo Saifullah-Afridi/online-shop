@@ -1,0 +1,40 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  justify-content: center;
+  list-style-type: none;
+}
+
+.li {
+  font-size: 20px;
+  border: 1px rgb(182, 170, 170) solid;
+}
+
+.links {
+  display: block;
+  padding: 5px 20px 5px 20px;
+}
+.page {
+  font-size: 20px;
+}
+.page-link {
+  padding: 5px 20px 5px 20px;
+  margin: 1px;
+  border: 1px rgb(182, 170, 170) solid;
+}
+
+.active-pagintaion {
+  background-color: hsl(337, 79%, 60%);
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.product {
+  width: 200px;
+}

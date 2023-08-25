@@ -12,27 +12,11 @@ const FeaturedProducts = () => {
   const { productss, isLoading, errorMessage } = useSelector(
     (state) => state.product
   );
-
+  let page = 1;
+  let limit = 9;
   useEffect(() => {
-    if (errorMessage) {
-      alert.error(errorMessage);
-    }
-    dispatch(getProducts());
-    // const controller = new AbortController();
-    // axios
-    //   .get("http://localhost:3001/api/v1/products", {
-    //     signal: controller.signal,
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //     setData(res.data.products);
-    //   })
-    //   .catch((err) => {
-    //     if (err instanceof CanceledError) return;
-    //     setError(err.message);
-    //   });
-    // return () => controller.abort();
-  }, [dispatch, errorMessage, alert]);
+    dispatch(getProducts(page, limit));
+  }, [dispatch]);
   return (
     <Box paddingX={4}>
       <Heading as="h2" paddingY="60px" textAlign="center">

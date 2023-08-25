@@ -1,19 +1,12 @@
-import React, { useState } from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import Product from "../components/Product";
-import "../components/Pagination.css";
-
-import { Grid, GridItem, Spinner } from "@chakra-ui/react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
+import Product from "../components/Product";
 import axios from "axios";
-
-const Products = () => {
+import "./Pagination.css";
+const Pagination = () => {
   const [data, SetData] = useState([]);
-  const limit = 6;
+  const limit = 4;
   const [pageCount, setPageCount] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
   const fetchData = async (currentPage) => {
     const { data } = await axios.get(
       `http://localhost:3001/api/v1/products?page=${currentPage}&limit=${limit}`
@@ -28,33 +21,21 @@ const Products = () => {
   };
 
   useEffect(() => {
-    setIsLoading(true);
     axios
       .get(`http://localhost:3001/api/v1/products?page=1&&limit=${limit}`)
       .then((res) => {
-        setIsLoading(false);
         const totel = res.data.totelProducts;
         setPageCount(Math.ceil(totel / limit));
         SetData(res.data.products);
       });
   }, []);
   return (
-    <React.Fragment>
-      <Navbar />
-      {isLoading && <Spinner />}
-      {data && (
-        <Grid templateColumns={"250px 1fr"} py="6rem" gap="10">
-          <GridItem bg="red">aasdfsfafaf</GridItem>
-          <Grid templateColumns={"1fr 1fr 1fr"} gap={6} mx={2}>
-            {data.map((product) => (
-              <GridItem key={product._id}>
-                <Product product={product}></Product>
-              </GridItem>
-            ))}
-          </Grid>
-        </Grid>
-      )}
-
+    <>
+      <div className="flex">
+        {data.map((dat) => (
+          <Product className="product" product={dat} key={dat._id} />
+        ))}
+      </div>
       <ReactPaginate
         previousLabel="Previous"
         nextLabel="Next"
@@ -73,9 +54,8 @@ const Products = () => {
         breakClassName="links"
         activeClassName="active-pagintaion"
       />
-      <Footer />
-    </React.Fragment>
+    </>
   );
 };
 
-export default Products;
+export default Pagination;
