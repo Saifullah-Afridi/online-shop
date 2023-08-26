@@ -20,7 +20,7 @@ router.route("/").get(protected, restrictedToAdmin, getAllUsers);
 router.route("/").patch(protected, restrictedToAdmin, updatePassword);
 router.route("/").delete(protected, restrictedToAdmin, deleteUser);
 router.get("/logout", logOut);
-router.route("/signin").post(signUp);
+router.route("/signup").post(signUp);
 router.route("/login").post(login);
 router.route("/forgotpassword").post(forgotPassword);
 router.route("/resetpassword/:token").patch(resetPassword);

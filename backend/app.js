@@ -8,10 +8,13 @@ const cookieParser = require("cookie-parser");
 const reviewRoutes = require("./routes/reviewRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const cors = require("cors");
-
+const fileUpload = require("express-fileupload");
+const bodParser = require("body-parser");
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
+app.use(fileUpload());
+app.use(bodParser.urlencoded({ extended: true }));
 //routes
 app.use("/api/v1/products", productRoutes);
 app.use("/api/v1/users", userRoutes);

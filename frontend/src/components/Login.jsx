@@ -35,10 +35,10 @@ const Login = () => {
     if (isError) {
       toast.error(errorMessage);
     }
-    if (isAuthenticated || user) {
-      navigate("/");
-    }
-    dispatch(reset());
+    // if (user) {
+    //   navigate("/");
+    // }
+    // dispatch(reset());
   }, [user, isError, errorMessage, navigate, dispatch]);
   return (
     <Flex minH={"100vh"} justify={"flex-end"}>

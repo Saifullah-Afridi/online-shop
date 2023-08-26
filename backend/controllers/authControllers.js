@@ -6,7 +6,15 @@ const createSendToken = require("../utils/createSendToken");
 const jwt = require("jsonwebtoken");
 const sendEmail = require("../middleware/sendEmail");
 const crypto = require("crypto");
+const cloudinary = require("cloudinary");
+
 exports.signUp = catchAsyncError(async (req, res, next) => {
+  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "avatars",
+    width: 150,
+    crop: "scale",
+  });
+
   const { email, password, passwordConfirm, name } = req.body;
   const user = await User.findOne({ email });
   console.log(user);
@@ -17,8 +25,8 @@ exports.signUp = catchAsyncError(async (req, res, next) => {
       password,
       passwordConfirm,
       avatar: {
-        url: "this is sample url",
-        public_id: "this sample id",
+        url: myCloud.secure_url,
+        public_id: myCloud.public_id,
       },
     });
 

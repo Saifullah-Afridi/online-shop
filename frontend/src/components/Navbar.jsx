@@ -12,10 +12,12 @@ import {
 } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 import React from "react";
-
 import Search from "./Search";
-
+import { logout, reset } from "../store/UserSlice";
+import { useDispatch, useSelector } from "react-redux";
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
   return (
     <Box
       width="100%"
@@ -39,20 +41,42 @@ const Navbar = () => {
           direction="row"
           gap="40px"
           verticalAlign="center"
-          fontSize="17px"
         >
           <NavLink to="/">Home</NavLink>
           <NavLink to="/products">Products</NavLink>
           <NavLink to="/contact">Contact us</NavLink>
           <NavLink to="/about">About</NavLink>
-          <NavLink to="/login">Login</NavLink>
         </Stack>
-        <HStack width="30%" gap={6}>
+        <HStack width="30%" gap={6} mr="1rem">
           <Search />
           <Text>Cart</Text>
-          <Button variant="outline" _hover={{ bgColor: "brand.primaryLight" }}>
-            Log Out
-          </Button>
+          {user ? (
+            <Button
+              variant="outline"
+              colorScheme="red"
+              _hover={{ bgColor: "brand.primaryLight" }}
+              fontSize="17px"
+              onClick={() => {
+                dispatch(logout());
+              }}
+            >
+              Log Out
+            </Button>
+          ) : (
+            <NavLink fontSize="17px" to="/login">
+              <Button
+                variant="outline"
+                colorScheme="red"
+                _hover={{ bgColor: "brand.primaryLight" }}
+                fontSize="17px"
+                onClick={() => {
+                  dispatch(logout());
+                }}
+              >
+                Log In
+              </Button>
+            </NavLink>
+          )}
         </HStack>
       </Flex>
     </Box>

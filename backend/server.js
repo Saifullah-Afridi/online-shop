@@ -8,10 +8,16 @@ const dotenv = require("dotenv");
 // });
 const app = require("./app");
 dotenv.config({ path: "./config/config.env" });
+const cloudinary = require("cloudinary");
 
 const dbConnect = require("./config/dataBaseConnect");
 dbConnect();
 
+cloudinary.config({
+  cloud_name: process.env.CLOULD_NAME,
+  api_key: process.env.CLOUD_KEY,
+  api_secret: process.env.CLOUD_SECRET,
+});
 const PORT = 3000;
 
 const server = app.listen(process.env.PORT || PORT, () => {
