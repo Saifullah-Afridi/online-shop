@@ -8,10 +8,11 @@ import {
   InputLeftElement,
   Text,
   HStack,
+  Button,
 } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 import React from "react";
-import { CiSearch } from "react-icons/ci";
+
 import Search from "./Search";
 
 const Navbar = () => {
@@ -44,10 +45,14 @@ const Navbar = () => {
           <NavLink to="/products">Products</NavLink>
           <NavLink to="/contact">Contact us</NavLink>
           <NavLink to="/about">About</NavLink>
+          <NavLink to="/login">Login</NavLink>
         </Stack>
-        <HStack width="25%" gap={6}>
+        <HStack width="30%" gap={6}>
           <Search />
           <Text>Cart</Text>
+          <Button variant="outline" _hover={{ bgColor: "brand.primaryLight" }}>
+            Log Out
+          </Button>
         </HStack>
       </Flex>
     </Box>
