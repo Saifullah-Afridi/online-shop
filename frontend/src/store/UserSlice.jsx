@@ -24,6 +24,11 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const logout = createSlice("logout/logoutUser", async () => {
+  await axios.get("http://localhost:3001/api/v1/users/logout");
+  localStorage.removeItem("user");
+});
+
 const userSlice = createSlice({
   name: "user",
   initialState: {

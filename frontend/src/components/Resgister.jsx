@@ -8,8 +8,13 @@ import {
   Button,
   Heading,
 } from "@chakra-ui/react";
+import { useState } from "react";
 
 const Resgister = () => {
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [passwordConfirm, setPasswordConfirm] = useState();
   return (
     <Flex minH={"100vh"}>
       <Stack spacing={8} py={12} px={10}>
