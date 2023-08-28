@@ -9,13 +9,9 @@ import SearchProducts from "./pages/SearchProducts";
 import LoginRegistration from "./pages/LoginRegistration";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Profile from "./pages/Profile";
 import MenuListDetail from "./components/MenuListDetail";
-import { useEffect } from "react";
-import store from "./store/store";
-import { useSelector, useDispatch } from "react-redux";
 import Navbar from "./components/Navbar";
-import LoadUserr from "./components/loadUser";
+import Account from "./pages/Account";
 
 function App() {
   return (
@@ -30,9 +26,8 @@ function App() {
           <Route path="/login" element={<LoginRegistration />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/searchproducts/:keyword" element={<SearchProducts />} />
-          <Route path="/profile" element={<Profile />} />
           <Route path="/menu" element={<MenuListDetail />} />
-          <Route path="/clickme" element={<LoadUserr />} />
+          <Route path="/profile" element={<Account />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer />

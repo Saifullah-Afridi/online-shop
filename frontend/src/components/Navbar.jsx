@@ -11,17 +11,13 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
-import React, { useEffect } from "react";
 import Search from "./Search";
-import { loadUser } from "../store/UserSlice";
+
 import MenuListDetail from "./MenuListDetail";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 const Navbar = () => {
-  const dispatch = useDispatch();
   const { userr } = useSelector((state) => state.user);
-  useEffect(() => {
-    dispatch(loadUser());
-  }, []);
+  console.log(userr);
   return (
     <Box
       width="100%"
@@ -54,19 +50,21 @@ const Navbar = () => {
         <HStack width="30%" gap={6} mr="1rem">
           <Search />
           <Text>Cart</Text>
-          {userr ? (
-            // <Button
-            //   variant="outline"
-            //   colorScheme="red"
-            //   _hover={{ bgColor: "brand.primaryLight" }}
-            //   fontSize="17px"
-            //   onClick={() => {
-            //     dispatch(logout());
-            //   }}
-            // >
-            //   Log Out
-            // </Button>
 
+          {userr && <MenuListDetail user={userr ? userr : undefined} />}
+          {!userr && (
+            <NavLink fontSize="17px" to="/login">
+              <Button
+                variant="outline"
+                colorScheme="red"
+                _hover={{ bgColor: "brand.primaryLight" }}
+                fontSize="17px"
+              >
+                Log In
+              </Button>
+            </NavLink>
+          )}
+          {/* {userr ? (
             <MenuListDetail user={userr} />
           ) : (
             <NavLink fontSize="17px" to="/login">
@@ -79,7 +77,7 @@ const Navbar = () => {
                 Log In
               </Button>
             </NavLink>
-          )}
+          )} */}
         </HStack>
       </Flex>
     </Box>
