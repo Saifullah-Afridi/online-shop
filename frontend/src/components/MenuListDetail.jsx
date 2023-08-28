@@ -4,23 +4,33 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
   Button,
   Avatar,
 } from "@chakra-ui/react";
 import { FiArrowDown } from "react-icons/fi";
 import { logout } from "../store/UserSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const MenuListDetail = ({ user }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const onHandleLogout = () => {
     dispatch(logout());
   };
-  console.log(user);
+
+  const onHandleOrders = () => {
+    navigate("/orders");
+  };
+
+  const onHandleProfile = () => {
+    navigate("/profile");
+  };
+
+  const onHandleDashboard = () => {
+    navigate("/dashboard");
+  };
+
   return (
     <Menu>
       <MenuButton
@@ -32,10 +42,16 @@ const MenuListDetail = ({ user }) => {
         <Avatar size="md" src={user.avatar.url} name={user.name} />
       </MenuButton>
       <MenuList>
-        <MenuItem _hover={{ bgColor: "red.100" }}>Orders</MenuItem>
-        <MenuItem _hover={{ bgColor: "red.100" }}>Profile</MenuItem>
+        <MenuItem _hover={{ bgColor: "red.100" }} onClick={onHandleOrders}>
+          Orders
+        </MenuItem>
+        <MenuItem _hover={{ bgColor: "red.100" }} onClick={onHandleProfile}>
+          Profile
+        </MenuItem>
         {user.role === "admin" && (
-          <MenuItem _hover={{ bgColor: "red.100" }}>Dashboard</MenuItem>
+          <MenuItem _hover={{ bgColor: "red.100" }} onClick={onHandleDashboard}>
+            Dashboard
+          </MenuItem>
         )}
         <MenuItem onClick={onHandleLogout} _hover={{ bgColor: "red.100" }}>
           Logout

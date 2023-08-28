@@ -19,10 +19,9 @@ import { useDispatch, useSelector } from "react-redux";
 const Navbar = () => {
   const dispatch = useDispatch();
   const { userr } = useSelector((state) => state.user);
-  // useEffect(() => {
-  //   dispatch(loadUser());
-  // }, [dispatch, userr]);
-  // console.log(userr);
+  useEffect(() => {
+    dispatch(loadUser());
+  }, []);
   return (
     <Box
       width="100%"
