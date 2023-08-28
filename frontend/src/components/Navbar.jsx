@@ -11,13 +11,18 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
-import React from "react";
+import React, { useEffect } from "react";
 import Search from "./Search";
-import { logout, reset } from "../store/UserSlice";
+import { loadUser } from "../store/UserSlice";
+import MenuListDetail from "./MenuListDetail";
 import { useDispatch, useSelector } from "react-redux";
 const Navbar = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
+  const { userr } = useSelector((state) => state.user);
+  // useEffect(() => {
+  //   dispatch(loadUser());
+  // }, [dispatch, userr]);
+  // console.log(userr);
   return (
     <Box
       width="100%"
@@ -50,18 +55,20 @@ const Navbar = () => {
         <HStack width="30%" gap={6} mr="1rem">
           <Search />
           <Text>Cart</Text>
-          {user ? (
-            <Button
-              variant="outline"
-              colorScheme="red"
-              _hover={{ bgColor: "brand.primaryLight" }}
-              fontSize="17px"
-              onClick={() => {
-                dispatch(logout());
-              }}
-            >
-              Log Out
-            </Button>
+          {userr ? (
+            // <Button
+            //   variant="outline"
+            //   colorScheme="red"
+            //   _hover={{ bgColor: "brand.primaryLight" }}
+            //   fontSize="17px"
+            //   onClick={() => {
+            //     dispatch(logout());
+            //   }}
+            // >
+            //   Log Out
+            // </Button>
+
+            <MenuListDetail user={userr} />
           ) : (
             <NavLink fontSize="17px" to="/login">
               <Button
@@ -69,9 +76,6 @@ const Navbar = () => {
                 colorScheme="red"
                 _hover={{ bgColor: "brand.primaryLight" }}
                 fontSize="17px"
-                onClick={() => {
-                  dispatch(logout());
-                }}
               >
                 Log In
               </Button>

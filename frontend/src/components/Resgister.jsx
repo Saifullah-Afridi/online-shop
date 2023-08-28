@@ -21,7 +21,7 @@ const Resgister = () => {
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState("/Profile.png");
   const dispatch = useDispatch();
-  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { isAuthenticated, userr } = useSelector((state) => state.user);
 
   const registerDataChange = (e) => {
     if (e.target.name === "avatar") {
@@ -47,10 +47,10 @@ const Resgister = () => {
   };
 
   useEffect(() => {
-    if (user || isAuthenticated) {
+    if (userr || isAuthenticated) {
       navigate("/");
     }
-  }, [user]);
+  }, [userr]);
   return (
     <Flex minH={"100vh"}>
       <Stack spacing={8} py={12} px={10}>

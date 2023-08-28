@@ -19,12 +19,12 @@ const router = express.Router();
 router.route("/").get(protected, restrictedToAdmin, getAllUsers);
 router.route("/").patch(protected, restrictedToAdmin, updatePassword);
 router.route("/").delete(protected, restrictedToAdmin, deleteUser);
+router.route("/me").get(protected, userDetail);
 router.get("/logout", logOut);
 router.route("/signup").post(signUp);
 router.route("/login").post(login);
 router.route("/forgotpassword").post(forgotPassword);
 router.route("/resetpassword/:token").patch(resetPassword);
-router.route("/me").get(protected, userDetail);
 router.route("/updatepassword").patch(protected, updatePassword);
 router.route("/:id").get(protected, restrictedToAdmin, getSingleUser);
 

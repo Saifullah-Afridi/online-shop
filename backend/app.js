@@ -12,7 +12,13 @@ const fileUpload = require("express-fileupload");
 const bodParser = require("body-parser");
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(
+  "*",
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 app.use(fileUpload());
 app.use(bodParser.urlencoded({ extended: true }));
 //routes

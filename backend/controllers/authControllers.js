@@ -61,16 +61,17 @@ exports.logOut = catchAsyncError(async (req, res, next) => {
 });
 exports.protected = catchAsyncError(async (req, res, next) => {
   let token;
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
-  ) {
-    token = req.headers.authorization.split(" ")[1];
-  }
+  // if (
+  //   req.headers.authorization &&
+  //   req.headers.authorization.startsWith("Bearer")
+  // ) {
+  //   token = req.headers.authorization.split(" ")[1];
+  // }
 
   if (req.cookies.token) {
     token = req.cookies.token;
   }
+  console.log(token);
   if (!token) {
     return next(new AppError("please login to access this page.", 401));
   }
@@ -162,7 +163,7 @@ exports.resetPassword = catchAsyncError(async (req, res, next) => {
 
 // for login user
 exports.userDetail = catchAsyncError(async (req, res, next) => {
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.user.id);
   res.status(200).json({
     status: "success",
     user,

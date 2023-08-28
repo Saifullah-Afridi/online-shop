@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { loginUser, reset } from "../store/UserSlice";
+import { loginUser } from "../store/UserSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -24,22 +24,19 @@ const Login = () => {
   const onSubmitHandler = () => {
     const userCrendential = { email, password };
     dispatch(loginUser(userCrendential));
-
-    setEmail("");
-    setPassword("");
+    ``;
   };
-  const { isAuthenticated, user, isError, errorMessage } = useSelector(
+  const { isAuthenticated, userr, isError, errorMessage } = useSelector(
     (state) => state.user
   );
   useEffect(() => {
     if (isError) {
       toast.error(errorMessage);
     }
-    // if (user) {
-    //   navigate("/");
-    // }
-    // dispatch(reset());
-  }, [user, isError, errorMessage, navigate, dispatch]);
+    if (userr) {
+      navigate("/");
+    }
+  }, [userr, isError, errorMessage, navigate, dispatch]);
   return (
     <Flex minH={"100vh"} justify={"flex-end"}>
       <Stack spacing={8} py={12} px={16}>

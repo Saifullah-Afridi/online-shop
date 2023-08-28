@@ -8,11 +8,13 @@ export const loginUser = createAsyncThunk(
       const res = await axios.post(
         "http://localhost:3001/api/v1/users/login",
         { email, password },
-        { headers: { "Content-Type": "application/json" } }
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
       );
-
       if (res.data) {
-        localStorage.setItem("user", JSON.stringify(res.data.useregisterUser));
+        localStorage.setItem("user", JSON.stringify(res.data.user));
       }
       console.log(res);
       return res.data.user;
@@ -25,7 +27,10 @@ export const loginUser = createAsyncThunk(
 );
 
 export const logout = createAsyncThunk("logout/logout", async () => {
-  await axios.get("http://localhost:3001/api/v1/users/logout");
+  await axios.get("http://localhost:3001/api/v1/users/logout", {
+    withCredentials: true,
+    credentials: "include",
+  });
 
   localStorage.removeItem("user");
 });
@@ -52,64 +57,90 @@ export const registerUser = createAsyncThunk(
     }
   }
 );
+
+export const loadUser = createAsyncThunk("loaduser/loadUser", async () => {
+  try {
+    const res = await axios.get("http://localhost:3001/api/v1/users/me", {
+      withCredentials: true,
+      credentials: "include",
+    });
+
+    return res.data.user;
+  } catch (error) {
+    console.log(error);
+    const message = error.response.data.message;
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    user: {},
+    userr: null,
     isAuthenticated: false,
     isLoading: false,
     isError: false,
     errorMessage: " ",
-  },
-  reducers: {
-    reset: (state, action) => {
-      state.isAuthenticated = false;
-      state.isLoading = false;
-      state.isError = false;
-      state.errorMessage = "";
-    },
   },
   extraReducers: (builder) => {
     builder.addCase(loginUser.pending, (state, action) => {
       state.isLoading = true;
       state.isAuthenticated = false;
       state.isError = false;
-      state.user = null;
+      state.userr = null;
     });
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isAuthenticated = true;
-      state.user = action.payload;
+      state.userr = action.payload;
     });
     builder.addCase(loginUser.rejected, (state, action) => {
       state.isLoading = false;
-      state.user = null;
+      state.userr = null;
       state.isError = true;
       state.errorMessage = action.payload;
     });
     builder.addCase(logout.fulfilled, (state, action) => {
       state.isAuthenticated = false;
-      state.user = null;
+      state.userr = null;
     });
     builder.addCase(registerUser.pending, (state, action) => {
       state.isLoading = true;
       state.isAuthenticated = false;
       state.isError = false;
-      state.user = null;
+      state.userr = null;
     });
     builder.addCase(registerUser.fulfilled, (state, action) => {
       state.isError = false;
       state.isLoading = false;
       state.isAuthenticated = true;
-      state.user = action.payload;
+      state.userr = action.payload;
     });
     builder.addCase(registerUser.rejected, (state, action) => {
       state.isLoading = false;
-      state.user = null;
+      state.userr = null;
+      state.isError = true;
+      state.errorMessage = action.payload;
+    });
+    builder.addCase(loadUser.pending, (state, action) => {
+      state.isLoading = true;
+      state.isAuthenticated = false;
+      state.isError = false;
+      state.userr = null;
+    });
+    builder.addCase(loadUser.fulfilled, (state, action) => {
+      state.isError = false;
+      state.isLoading = false;
+      state.isAuthenticated = true;
+      state.userr = action.payload;
+    });
+    builder.addCase(loadUser.rejected, (state, action) => {
+      state.isLoading = false;
+      state.userr = null;
       state.isError = true;
       state.errorMessage = action.payload;
     });
   },
 });
-export const { reset } = userSlice.actions;
+
 export default userSlice.reducer;
