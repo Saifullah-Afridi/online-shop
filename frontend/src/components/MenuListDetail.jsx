@@ -39,7 +39,7 @@ const MenuListDetail = ({ user }) => {
         _hover={{ bgColor: "white" }}
         rightIcon={<FiArrowDown />}
       >
-        <Avatar size="md" src={user?.avatar?.url} name={user.name} />
+        <Avatar size="md" src={user?.avatar?.url} name={user?.name} />
       </MenuButton>
       <MenuList>
         <MenuItem _hover={{ bgColor: "red.100" }} onClick={onHandleOrders}>
@@ -48,7 +48,7 @@ const MenuListDetail = ({ user }) => {
         <MenuItem _hover={{ bgColor: "red.100" }} onClick={onHandleProfile}>
           Profile
         </MenuItem>
-        {user.role === "admin" && (
+        {user?.role === "admin" && (
           <MenuItem _hover={{ bgColor: "red.100" }} onClick={onHandleDashboard}>
             Dashboard
           </MenuItem>

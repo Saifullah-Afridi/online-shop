@@ -8,7 +8,6 @@ import Footer from "../components/Footer";
 const Home = () => {
   return (
     <Fragment>
-      <Navbar s></Navbar>
       <HeroSection />
       <FeaturedProducts />
       <Footer />

@@ -24,22 +24,28 @@ const Login = () => {
   const onSubmitHandler = () => {
     const userCrendential = { email, password };
     dispatch(loginUser(userCrendential));
-    ``;
   };
-  const { isAuthenticated, userr, isError, errorMessage } = useSelector(
+  const { isAuthenticated, isError, errorMessage } = useSelector(
     (state) => state.user
   );
   useEffect(() => {
     if (isError) {
       toast.error(errorMessage);
     }
-    if (userr) {
+    if (isAuthenticated) {
       navigate("/");
     }
-  }, [userr, isError, errorMessage, navigate, dispatch]);
+  }, [dispatch, isAuthenticated, isError, errorMessage]);
   return (
-    <Flex minH={"100vh"} justify={"flex-end"}>
-      <Stack spacing={8} py={12} px={16}>
+    <Flex minH={"100vh"} justify={"flex-end"} pt="8rem">
+      <Stack
+        spacing={8}
+        w={{
+          base: "90%",
+          lg: "50%",
+        }}
+        mx="auto"
+      >
         <Stack align={"center"}>
           <Heading fontSize={"4xl"}>Login to your account</Heading>
         </Stack>

@@ -52,12 +52,22 @@ const Resgister = () => {
     }
   }, [userr]);
   return (
-    <Flex minH={"100vh"}>
-      <Stack spacing={8} py={12} px={10}>
+    <Flex minH={"100vh"} pt="6rem">
+      <Stack
+        shadow="outline"
+        spacing={8}
+        py={12}
+        px={10}
+        w={{
+          base: "90%",
+          lg: "50%",
+        }}
+        mx="auto"
+      >
         <Stack align={"center"}>
           <Heading fontSize={"4xl"}>Sign in to your account</Heading>
         </Stack>
-        <Box rounded={"lg"} boxShadow={"lg"} p={8}>
+        <Box rounded={"lg"} boxShadow={"lg"} p={3}>
           <Stack spacing={4}>
             <FormControl id="name">
               <FormLabel>Name</FormLabel>

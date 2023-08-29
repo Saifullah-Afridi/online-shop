@@ -16,10 +16,9 @@ export const loginUser = createAsyncThunk(
       if (res.data) {
         localStorage.setItem("user", JSON.stringify(res.data.user));
       }
-      console.log(res);
+
       return res.data.user;
     } catch (error) {
-      console.log(error);
       const message = error.response.data.message;
       return thunkAPI.rejectWithValue(message);
     }
@@ -48,10 +47,9 @@ export const registerUser = createAsyncThunk(
       if (res.data) {
         localStorage.setItem("user", JSON.stringify(res.data.user));
       }
-      console.log(res);
+
       return res.data.user;
     } catch (error) {
-      console.log(error);
       const message = error.response.data.message;
       return thunkAPI.rejectWithValue(message);
     }
@@ -60,18 +58,34 @@ export const registerUser = createAsyncThunk(
 
 export const loadUser = createAsyncThunk("loaduser/loadUser", async () => {
   try {
-    const res = await axios.get("http://localhost:3001/api/v1/users/me", {
+    const { data } = await axios.get("http://localhost:3001/api/v1/users/me", {
       withCredentials: true,
       credentials: "include",
     });
 
-    return res.data.user;
+    return data.user;
   } catch (error) {
-    console.log(error);
     const message = error.response.data.message;
     return thunkAPI.rejectWithValue(message);
   }
 });
+
+export const updateUser = createAsyncThunk(
+  "update/updateUser",
+  async (updatingData, thunkAPI) => {
+    try {
+      const { data } = await axios.patch("", updatingData, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+        credentials: "include",
+      });
+      return data.updatedUser;
+    } catch (error) {
+      const message = error.response.data.message;
+      thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 const userSlice = createSlice({
   name: "user",
@@ -122,12 +136,7 @@ const userSlice = createSlice({
       state.isError = true;
       state.errorMessage = action.payload;
     });
-    builder.addCase(loadUser.pending, (state, action) => {
-      state.isLoading = true;
-      state.isAuthenticated = false;
-      state.isError = false;
-      state.userr = null;
-    });
+
     builder.addCase(loadUser.fulfilled, (state, action) => {
       state.isError = false;
       state.isLoading = false;
