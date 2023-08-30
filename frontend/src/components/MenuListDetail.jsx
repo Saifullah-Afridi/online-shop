@@ -7,7 +7,7 @@ import {
   Button,
   Avatar,
 } from "@chakra-ui/react";
-import { FiArrowDown } from "react-icons/fi";
+
 import { logout } from "../store/UserSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -33,12 +33,7 @@ const MenuListDetail = ({ user }) => {
 
   return (
     <Menu>
-      <MenuButton
-        as={Button}
-        bgColor="white"
-        _hover={{ bgColor: "white" }}
-        rightIcon={<FiArrowDown />}
-      >
+      <MenuButton as={Button} bgColor="white" _hover={{ bgColor: "white" }}>
         <Avatar size="md" src={user?.avatar?.url} name={user?.name} />
       </MenuButton>
       <MenuList>

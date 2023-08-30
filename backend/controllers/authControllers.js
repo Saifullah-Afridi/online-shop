@@ -186,6 +186,7 @@ exports.updatePassword = catchAsyncError(async (req, res, next) => {
 });
 
 exports.updateMe = catchAsyncError(async (req, res, next) => {
+  //error while user using this route to change password
   if (req.body.passsword || req.body.passwordConfirm) {
     return next(
       new AppError(
@@ -194,6 +195,8 @@ exports.updateMe = catchAsyncError(async (req, res, next) => {
       )
     );
   }
+
+  //updating the routes
 
   //must be very carefull,will not allow clients to change role,token or other fields
   //only allow to change specific fields

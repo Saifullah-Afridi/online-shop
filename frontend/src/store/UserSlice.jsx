@@ -70,7 +70,7 @@ export const loadUser = createAsyncThunk("loaduser/loadUser", async () => {
   }
 });
 
-export const updateUser = createAsyncThunk(
+export const updateProfile = createAsyncThunk(
   "update/updateUser",
   async (updatingData, thunkAPI) => {
     try {
@@ -95,6 +95,7 @@ const userSlice = createSlice({
     isLoading: false,
     isError: false,
     errorMessage: " ",
+    updatedUser: {},
   },
   extraReducers: (builder) => {
     builder.addCase(loginUser.pending, (state, action) => {
@@ -146,6 +147,18 @@ const userSlice = createSlice({
     builder.addCase(loadUser.rejected, (state, action) => {
       state.isLoading = false;
       state.userr = null;
+      state.isError = true;
+      state.errorMessage = action.payload;
+    });
+    builder.addCase(updateProfile.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(updateProfile.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.updatedUser = action.payload;
+    });
+    builder.addCase(updateProfile.rejected, (state, action) => {
+      state.isLoading = false;
       state.isError = true;
       state.errorMessage = action.payload;
     });

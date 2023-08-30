@@ -32,7 +32,7 @@ function App() {
       <BrowserRouter>
         <Flex justifyContent="space-between" w="99%" alignItems="center">
           <Navbar />
-          {isAuthenticated && <MenuListDetail w="1%" />}
+          {isAuthenticated && <MenuListDetail user={userr} w="1%" />}
         </Flex>
         <Routes>
           <Route path="/" element={<Home />} />
