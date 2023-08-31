@@ -26,7 +26,6 @@ exports.getAllProducts = catchAsyncError(async (req, res, next) => {
 
   // advance filtering includeing operator including gte lt lte gte
 
-  console.log(req.query);
   let queryString = JSON.stringify(queryObj);
   queryString = queryString.replace(
     /\b(gte|gt|lte|lt)\b/g,

@@ -25,7 +25,7 @@ router.route("/signup").post(signUp);
 router.route("/login").post(login);
 router.route("/forgotpassword").post(forgotPassword);
 router.route("/updatepassword").patch(protected, updatePassword);
-router.route("/:id").patch(protected, updateMe);
+router.route("/updateme").patch(protected, updateMe);
 router.route("/:id").get(protected, restrictedToAdmin, getSingleUser);
 router.route("/resetpassword/:token").patch(resetPassword);
 

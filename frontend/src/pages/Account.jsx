@@ -13,14 +13,15 @@ import {
   Spinner,
   Stack,
   Text,
-  Link,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 const Account = () => {
   const dispatch = useDispatch();
   const { userr, isAuthenticated, isLoading } = useSelector(
     (state) => state.user
   );
+
   useEffect(() => {
     dispatch(loadUser());
   }, []);
@@ -46,10 +47,12 @@ const Account = () => {
               lg: "50%",
             }}
           >
-            <Image src={userr.avatar.url} boxSize="400px"></Image>
-            <Button bgColor="brand.primary" mt={6} w="60%" size="lg">
-              Edit Profile
-            </Button>
+            <Image src={userr?.avatar?.url} boxSize="400px"></Image>
+            <Link to="updateprofile">
+              <Button bgColor="brand.primary" mt={6} w="60%" size="lg">
+                Edit Profile
+              </Button>
+            </Link>
           </Box>
           <Box
             pt="5rem"
@@ -82,7 +85,7 @@ const Account = () => {
                   My Orders
                 </Button>
               </Link>
-              <Link>
+              <Link to={"/profile/updatepassword"}>
                 <Button
                   w="100%"
                   my={2}

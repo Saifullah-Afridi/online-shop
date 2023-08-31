@@ -10,6 +10,7 @@ const orderRoutes = require("./routes/orderRoutes");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const bodParser = require("body-parser");
+const morgan = require("morgan");
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -21,6 +22,7 @@ app.use(
 );
 app.use(fileUpload());
 app.use(bodParser.urlencoded({ extended: true }));
+app.use(morgan("dev"));
 //routes
 app.use("/api/v1/products", productRoutes);
 app.use("/api/v1/users", userRoutes);

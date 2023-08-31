@@ -18,19 +18,29 @@ import { useEffect } from "react";
 import store from "./store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "./store/UserSlice";
-import { Flex, Menu, Text } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import ProtectedRoutes from "./components/Routes/ProtectedRoutes";
+import UpdateProfile from "./pages/UpdateProfile";
+import ChangePassword from "./pages/ChangePassword";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+
 function App() {
   const dispatch = useDispatch();
   const { userr, isAuthenticated } = useSelector((state) => state.user);
-  console.log(isAuthenticated, "****************************");
+
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
   return (
     <>
       <BrowserRouter>
-        <Flex justifyContent="space-between" w="99%" alignItems="center">
+        <Flex
+          justifyContent="space-between"
+          w="99%"
+          alignItems="center"
+          shadow="md"
+        >
           <Navbar />
           {isAuthenticated && <MenuListDetail user={userr} w="1%" />}
         </Flex>
@@ -52,6 +62,24 @@ function App() {
               </ProtectedRoutes>
             }
           />
+          <Route
+            path="/profile/updateprofile"
+            element={
+              <ProtectedRoutes>
+                <UpdateProfile />
+              </ProtectedRoutes>
+            }
+          />
+          <Route
+            path="/profile/updatepassword"
+            element={
+              <ProtectedRoutes>
+                <ChangePassword />
+              </ProtectedRoutes>
+            }
+          />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/resetpassword/:token" element={<ResetPassword />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer />

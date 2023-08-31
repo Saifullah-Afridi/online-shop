@@ -71,7 +71,7 @@ exports.protected = catchAsyncError(async (req, res, next) => {
   if (req.cookies.token) {
     token = req.cookies.token;
   }
-  console.log(token);
+
   if (!token) {
     return next(new AppError("please login to access this page.", 401));
   }
@@ -171,7 +171,7 @@ exports.userDetail = catchAsyncError(async (req, res, next) => {
 });
 
 exports.updatePassword = catchAsyncError(async (req, res, next) => {
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.user.id);
   if (!(await user.comparePassword(req.body.oldPassword))) {
     return next(
       new AppError(
@@ -186,7 +186,6 @@ exports.updatePassword = catchAsyncError(async (req, res, next) => {
 });
 
 exports.updateMe = catchAsyncError(async (req, res, next) => {
-  //error while user using this route to change password
   if (req.body.passsword || req.body.passwordConfirm) {
     return next(
       new AppError(
@@ -196,25 +195,38 @@ exports.updateMe = catchAsyncError(async (req, res, next) => {
     );
   }
 
-  //updating the routes
+  const newUserData = {
+    name: req.body.name,
+    email: req.body.email,
+  };
 
-  //must be very carefull,will not allow clients to change role,token or other fields
-  //only allow to change specific fields
+  if (req.body.avatar !== "") {
+    const user = await User.findById(req.user.id);
 
-  const updatedUser = await User.findByIdAndUpdate(
-    req.user._id,
-    {
-      name: req.body.name,
-      email: req.body.email,
-    },
-    {
-      new: true,
-      runValidators: true,
-    }
-  );
+    const imageId = user.avatar.public_id;
+
+    await cloudinary.v2.uploader.destroy(imageId);
+
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+      folder: "avatars",
+      width: 150,
+      crop: "scale",
+    });
+
+    newUserData.avatar = {
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
+    };
+  }
+
+  const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+    new: true,
+    runValidators: true,
+  });
+
   res.status(200).json({
     status: "success",
     message: "Your profile has been updated",
-    updatedUser,
+    user,
   });
 });

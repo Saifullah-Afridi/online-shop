@@ -63,7 +63,6 @@ const Products = () => {
   }, []);
   return (
     <React.Fragment>
-      <Navbar />
       {isLoading && <Spinner />}
       {data && (
         <Grid
