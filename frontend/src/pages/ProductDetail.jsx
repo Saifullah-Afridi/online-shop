@@ -11,9 +11,9 @@ import {
   HStack,
   SimpleGrid,
   Spinner,
+  Input,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import CustomButton from "../components/CustomButton";
 import Footer from "../components/Footer";
 import { useParams } from "react-router-dom";
@@ -21,27 +21,42 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductDetail } from "../store/productDetailSlice";
 import ReactStars from "react-rating-stars-component";
 import top2 from "../assets/top2.jpg";
-import ProductQuantity from "../components/ProductQuantity";
 import ReviewCard from "../components/ReviewCard";
+import { addToCart } from "../store/CartSlice";
 
 const ProductDetail = () => {
+  const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector((state) => state.productDetail.productDe);
   const loading = useSelector((state) => state.productDetail.isLoading);
 
+  const increaseQuantity = () => {
+    //checking if the stock is avaible and  forbid the user to not add more then the stock available
+    if (product.stock <= quantity) return;
+    let quat = quantity + 1;
+    setQuantity(quat);
+  };
+  const decreaseQuantity = () => {
+    if (quantity <= 1) return;
+
+    setQuantity((prev) => setQuantity(prev - 1));
+  };
+
+  const onHandleClick = () => {
+    const addProduct = { ...product, quantity };
+    dispatch(addToCart(addProduct));
+    console.log("how");
+  };
   useEffect(() => {
     dispatch(getProductDetail(id));
-  }, [dispatch, id]);
-
+  }, [id]);
   return (
     <>
       {loading ? (
         <Spinner />
       ) : (
         <>
-          <Navbar />
-
           <Grid
             // templateAreas={`"column1  coulmn2"`}
             templateColumns={{
@@ -80,9 +95,29 @@ const ProductDetail = () => {
 
               <Text fontSize="2rem">Price: ${product.price}</Text>
               <Divider my="2rem" borderBottom="1px" />
-              <HStack>
-                <ProductQuantity />
-                <CustomButton text="Add to Cart" />
+              <HStack gap={6}>
+                <HStack>
+                  <Button onClick={decreaseQuantity} colorScheme="green">
+                    -
+                  </Button>
+                  <Input
+                    type="number"
+                    value={quantity}
+                    w="90px"
+                    min={1}
+                    readOnly
+                  />
+                  <Button onClick={increaseQuantity} colorScheme="green">
+                    +
+                  </Button>
+                </HStack>
+                <Button
+                  bgColor="brand.primary"
+                  rounded="full"
+                  onClick={onHandleClick}
+                >
+                  Add to Cart
+                </Button>
               </HStack>
               <Divider my="2rem" borderBottom="1px" />
               <Box>
