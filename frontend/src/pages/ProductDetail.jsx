@@ -46,7 +46,6 @@ const ProductDetail = () => {
   const onHandleClick = () => {
     const addProduct = { ...product, quantity };
     dispatch(addToCart(addProduct));
-    console.log("how");
   };
   useEffect(() => {
     dispatch(getProductDetail(id));

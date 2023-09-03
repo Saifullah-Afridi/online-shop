@@ -1,16 +1,13 @@
 import {
-  Box,
   Flex,
   Heading,
-  Input,
   Stack,
-  InputGroup,
-  InputLeftElement,
-  Text,
   HStack,
   Button,
+  Icon,
+  Text,
 } from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Search from "./Search";
 
 import { useSelector } from "react-redux";
@@ -40,8 +37,11 @@ const Navbar = () => {
       </Stack>
       <HStack width="30%" gap={6} mr="1rem">
         <Search />
-        <Text>Cart</Text>
-
+        <Link to="/cart">
+          <Text bgColor="green.300" px={5} py={2} rounded="full">
+            Cart
+          </Text>
+        </Link>
         {!isAuthenticated && (
           <NavLink fontSize="17px" to="/login">
             <Button

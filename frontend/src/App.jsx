@@ -24,6 +24,7 @@ import UpdateProfile from "./pages/UpdateProfile";
 import ChangePassword from "./pages/ChangePassword";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import Cart from "./pages/Cart";
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +55,7 @@ function App() {
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/searchproducts/:keyword" element={<SearchProducts />} />
           <Route path="/menu" element={<MenuListDetail />} />
+          <Route path="/cart" element={<Cart />} />
           <Route
             path="/profile"
             element={
