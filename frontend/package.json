@@ -17,6 +17,8 @@
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
     "cors": "^2.8.5",
+    "country-list": "^2.3.0",
+    "country-state-city": "^3.0.1",
     "framer-motion": "^10.16.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

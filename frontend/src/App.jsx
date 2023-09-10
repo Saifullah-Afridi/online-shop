@@ -25,6 +25,7 @@ import ChangePassword from "./pages/ChangePassword";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Cart from "./pages/Cart";
+import Shiping from "./pages/shiping";
 
 function App() {
   const dispatch = useDispatch();
@@ -82,6 +83,14 @@ function App() {
           />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/resetpassword/:token" element={<ResetPassword />} />
+          <Route
+            path="/shiping"
+            element={
+              <ProtectedRoutes>
+                <Shiping></Shiping>
+              </ProtectedRoutes>
+            }
+          />
         </Routes>
       </BrowserRouter>
       <ToastContainer />

@@ -13,7 +13,9 @@ import {
 } from "@chakra-ui/react";
 import { addToCart, removeCartItem } from "../store/CartSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const Cart = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
   const increaseQuantity = (product, quantity, stock) => {
@@ -32,7 +34,9 @@ const Cart = () => {
   const onHandleDelete = (id) => {
     dispatch(removeCartItem(id));
   };
-  const onCheckHandler = () => {};
+  const onOrderHandler = () => {
+    navigate("/shiping");
+  };
   return (
     <>
       {cartItems.length === 0 ? (
@@ -109,7 +113,7 @@ const Cart = () => {
                 0
               )}
             </Text>
-            <Button bgColor="brand.primaryDark" onClick={onCheckHandler}>
+            <Button bgColor="brand.primaryDark" onClick={onOrderHandler}>
               Order Now /Check Out
             </Button>
           </HStack>
