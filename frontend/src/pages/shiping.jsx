@@ -14,7 +14,7 @@ const shiping = () => {
   const [country, setCountry] = useState(shipingInfo.country);
   const [pincode, setPinCode] = useState(shipingInfo.pincode);
   const [phoneNumber, setPhoneNumber] = useState(shipingInfo.phoneNumber);
-  console.log(getData("Pakistan"));
+
   return (
     <Box>
       <Heading as="h1" size="lg" textAlign="center">

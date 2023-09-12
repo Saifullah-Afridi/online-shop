@@ -26,6 +26,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import Cart from "./pages/Cart";
 import Shiping from "./pages/shiping";
+import CheckoutSuccess from "./components/CheckoutSuccess";
 
 function App() {
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ function App() {
           <Route path="/searchproducts/:keyword" element={<SearchProducts />} />
           <Route path="/menu" element={<MenuListDetail />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout-success" element={<CheckoutSuccess />} />
           <Route
             path="/profile"
             element={

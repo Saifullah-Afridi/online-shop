@@ -10,6 +10,8 @@ const orderRoutes = require("./routes/orderRoutes");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const bodParser = require("body-parser");
+const stripe = require("./routes/payment");
+
 const morgan = require("morgan");
 app.use(express.json());
 app.use(cookieParser());
@@ -28,6 +30,8 @@ app.use("/api/v1/products", productRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/reviews", reviewRoutes);
 app.use("/api/v1/orders", orderRoutes);
+app.use("/api/v1/stripe", stripe);
+
 app.all("*", (req, res, next) => {
   next(new AppError(`can not find ${req.originalUrl} on this server`, 404));
 });
